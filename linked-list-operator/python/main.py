@@ -65,3 +65,42 @@ class LinkedList:
             last = last.next
 
         last.next = new_node
+
+    def delete_node(self, position: int):
+        if self.__head is None:
+            return
+
+        temp = self.__head
+
+        if position == 0:
+            self.__head = temp.next
+            temp = None
+            return
+
+        for _ in range(position - 1):
+            temp = temp.next
+            if temp is None:
+                break
+
+        # if the key not present
+        if temp is None:
+            return
+
+        if temp.next is None:
+            return
+
+        next = temp.next.next
+
+        temp.next = next
+        temp.next = None
+
+    def search(self, data):
+        current = self.__head
+
+        while current is not None:
+            if current.data == data:
+                return True
+
+            current = current.next
+
+        return False
