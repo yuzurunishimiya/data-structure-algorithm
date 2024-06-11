@@ -1,9 +1,19 @@
+"""Regular Queue
+
+- implemented FIFO (First in First out) Principle
+- Putting items in the queue: enqueue
+- Removing items in the queue: dequeue
+- Complexity: 0(1)
+
+"""
+
+
 class Queue:
+    """Queue's class"""
 
     def __init__(self) -> None:
         self.__queue: list = []
 
-    @property
     def queue(self):
         return self.__queue
 
@@ -14,7 +24,7 @@ class Queue:
 
     def enqueue(self, item):
         self.__queue.append(item)
-    
+
     def dequeue(self):
         if self.check_empty():
             return None

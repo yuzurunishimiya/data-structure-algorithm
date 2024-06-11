@@ -1,3 +1,11 @@
+"""Circular Queue
+
+- Extended version of regular queue
+- The last element of queue connected to the first element
+- 
+"""
+
+
 class CircularQueue:
 
     def __init__(self, max_size: int) -> None:
