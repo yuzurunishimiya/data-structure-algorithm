@@ -1,0 +1,27 @@
+Complexity in algorithms refers to how the runtime or memory requirements of an algorithm scale with the size of the input. It helps us understand how the algorithm's performance changes as the size of the input grows. 
+
+The most common notations used to denote algorithmic complexity are Big O, Big Omega, and Big Theta. Here's a brief explanation of each:
+
+1. **Big O Notation (O)**:
+   - Big O notation represents the upper bound of the algorithm's complexity. It provides an asymptotic upper bound on the running time or memory usage of an algorithm in the worst-case scenario.
+   - For example, if an algorithm has a time complexity of O(n), it means that the worst-case runtime grows linearly with the size of the input (n).
+
+2. **Big Omega Notation (Ω)**:
+   - Big Omega notation represents the lower bound of the algorithm's complexity. It provides an asymptotic lower bound on the running time or memory usage of an algorithm in the best-case scenario.
+   - For example, if an algorithm has a time complexity of Ω(n), it means that the best-case runtime grows linearly with the size of the input (n).
+
+3. **Big Theta Notation (Θ)**:
+   - Big Theta notation represents both the upper and lower bounds of the algorithm's complexity. It provides a tight asymptotic bound on the running time or memory usage of an algorithm.
+   - For example, if an algorithm has a time complexity of Θ(n), it means that the runtime grows linearly with the size of the input (n) in both the best and worst cases.
+
+Now, let's look at some common complexities and their meanings:
+
+- **O(1)** (constant time): The algorithm's runtime or memory usage remains constant regardless of the size of the input. This is the best possible complexity.
+- **O(log n)** (logarithmic time): The algorithm's runtime or memory usage grows logarithmically with the size of the input. Common in algorithms with divide-and-conquer or binary search approaches.
+- **O(n)** (linear time): The algorithm's runtime or memory usage grows linearly with the size of the input. Common in algorithms that iterate over the input once.
+- **O(n log n)** (linearithmic time): The algorithm's runtime or memory usage grows in proportion to n times the logarithm of n. Common in efficient sorting algorithms like merge sort and quicksort.
+- **O(n^2)** (quadratic time): The algorithm's runtime or memory usage grows quadratically with the size of the input. Common in algorithms with nested loops.
+- **O(2^n)** (exponential time): The algorithm's runtime or memory usage grows exponentially with the size of the input. Common in recursive algorithms with branching factors.
+- **O(n!)** (factorial time): The algorithm's runtime or memory usage grows factorial with the size of the input. Common in brute-force algorithms that generate all permutations or combinations.
+
+These are just a few examples of common complexities. Understanding algorithmic complexity helps in comparing and selecting algorithms based on their efficiency for different problem sizes.
