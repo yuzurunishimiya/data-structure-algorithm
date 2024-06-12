@@ -16,29 +16,37 @@ import random
 
 
 class Deque:
+    """Dequeue (Dynamic/non-strict/unfixed size)"""
+
     def __init__(self) -> None:
         self.__items = []
 
     def is_empty(self):
-        return self.__items == []
+        """check if empty"""
+        return not self.__items
 
     def add_rear(self, item: Any):
+        """add item to rear of queue"""
         self.__items.append(item)
 
     def add_front(self, item: Any):
+        """add item to front of queue"""
         self.__items.insert(0, item)
 
     def remove_front(self):
+        """remove item from front of queue"""
         if len(self.__items) > 0:
             return self.__items.pop(0)
         return None
 
     def remove_rear(self):
+        """remove item from rear of queue"""
         if len(self.__items) > 0:
             return self.__items.pop()
         return None
 
     def size(self):
+        """get size of queue"""
         return len(self.__items)
 
 
