@@ -100,41 +100,46 @@ class RegularQueue:
         if self.__head == -1:
             print("Queue is empty!")
         else:
-            for index in range(self.__head, self.__max_size):
+            for index in range(self.__head, self.__tail + 1):
                 print(self.__queue[index], end=" ")
 
 
 class InsertPopQueueTesting:
     """To insert and pop queue for testing"""
 
-    @staticmethod
-    def insert(queue_: RegularQueue, length: int):
-        """to insert"""
+    def __init__(self, tested_class: RegularQueue) -> None:
+        self.__uniq_incr: int = 9
+        self.__queue_obj: RegularQueue = tested_class
 
-        for number in range(length):
+    def _dispay(self) -> None:
+        """doc here..."""
+
+        print("queue: ", end=" ")
+        self.__queue_obj.display_queue()
+        print("queue items: ", end=" ")
+        self.__queue_obj.display_queue_items()
+        print()
+
+    def insert(self, length: int) -> None:
+        """to insert item/element to queue"""
+
+        for _ in range(length):
+            self.__uniq_incr += 1
             print(" --- ")
-            number = number + 10 # biar +10 aja
-            print("trying enqueue new item: ", number)
-            queue_.enqueue(item=str(number))
-            print("queue: ", end=" ")
-            queue_.display_queue()
-            print("queue items: ", end=" ")
-            queue_.display_queue_items()
+            print("trying enqueue new item: ", self.__uniq_incr)
+            self.__queue_obj.enqueue(self.__uniq_incr)
+            self._dispay()
             print()
             print(" --- ")
 
-    @staticmethod
-    def pop(queue_: RegularQueue, length: int):
-        """to insert"""
+    def pop(self, length: int):
+        """to pop item/element from queue"""
 
         for _ in range(length):
             print(" --- ")
-            popped_item = queue_.dequeue()
+            popped_item = self.__queue_obj.dequeue()
             print("popped item: ", popped_item)
-            print("queue: ", end=" ")
-            queue_.display_queue()
-            print("queue items: ", end=" ")
-            queue_.display_queue_items()
+            self._dispay()
             print(" --- ")
 
 
@@ -162,13 +167,13 @@ if __name__ == "__main__":
 
     print(" --- new regular queue code log ---")
     regular_queue = RegularQueue(max_size=5)
-    trq = InsertPopQueueTesting()
-    trq.insert(regular_queue, 6)
-    trq.pop(regular_queue, 2)
-    trq.insert(regular_queue, 2)
-    trq.pop(regular_queue, 6)
-    trq.insert(regular_queue, 3)
-    trq.pop(regular_queue, 2)
-    trq.insert(regular_queue, 1)
-    trq.pop(regular_queue, 2)
+    trq = InsertPopQueueTesting(regular_queue)
+    trq.insert(6)
+    trq.pop(2)
+    trq.insert(2)
+    trq.pop(6)
+    trq.insert(3)
+    trq.pop(2)
+    trq.insert(1)
+    trq.pop(2)
     print(" --- end of new regular queue code log ---")

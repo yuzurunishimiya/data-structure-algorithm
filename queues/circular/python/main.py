@@ -110,43 +110,60 @@ class CircularQueue:
                 print(self.__queue[index], end=" ")
 
 
-def insert_item_test(queue_obj: object, size: int):
-    """untuk test insert"""
-    for item in range(size): # 0 - 6, untuk cek jika queue full
-        queue_obj.enqueue(str(item + 10)) # sengaja kita set item+10 (chg to string juga)
-        print(f"enqueue new item: {item + 10}")
+class Testing:
+    """Testing Circular Queue"""
 
-        print("queue-list-type:", end=" ")
-        queue_obj.print_queue()
+    def __init__(self, tested_class: CircularQueue) -> None:
+        self.__uniq_incr: int = 9
+        self.__queue_obj: CircularQueue = tested_class
 
-        print("queue:", end=" ")
-        queue_obj.print_queue_old()
 
+    def _dispay(self) -> None:
+        """doc here..."""
+
+        print("queue: ", end=" ")
+        self.__queue_obj.print_queue()
+        print("queue items: ", end=" ")
+        self.__queue_obj.print_queue_old()
         print()
-        print("--- ---")
 
+    def insert(self, length: int) -> None:
+        """to insert item/element to queue"""
 
-def pop_item_test(queue_obj: object, size: int):
-    """untuk test dequeue"""
-    for _ in range(size):
-        popped = queue_obj.dequeue()
-        print("dequeue item: ", popped)
+        for _ in range(length):
+            self.__uniq_incr += 1
+            print(" --- ")
+            print("trying enqueue new item: ", self.__uniq_incr)
+            self.__queue_obj.enqueue(self.__uniq_incr)
+            self._dispay()
+            print()
+            print(" --- ")
 
-        print("queue-list-type:", end=" ")
-        queue_obj.print_queue()
+    def pop(self, length: int):
+        """to pop item/element from queue"""
 
-        print("queue:", end=" ")
-        queue_obj.print_queue_old()
-
-        print()
-        print("--- ---")
+        for _ in range(length):
+            print(" --- ")
+            popped_item = self.__queue_obj.dequeue()
+            print("popped item: ", popped_item)
+            self._dispay()
+            print(" --- ")
 
 
 if __name__ == "__main__":
     # testing
 
     circular_queue = CircularQueue(max_size=5)
-    insert_item_test(circular_queue, 7) # dibuat lebih dari max-size untuk test
-    pop_item_test(circular_queue, 3)
-    insert_item_test(circular_queue, 2)
-    pop_item_test(circular_queue, 5)
+    tcq = Testing(circular_queue)
+    tcq.insert(7)
+    tcq.pop(3)
+    tcq.insert(2)
+    tcq.pop(5)
+    tcq.insert(1)
+    tcq.pop(1)
+    tcq.insert(3)
+    tcq.insert(1)
+    tcq.pop(2)
+    tcq.insert(1)
+    tcq.insert(2)
+    tcq.pop(2)
