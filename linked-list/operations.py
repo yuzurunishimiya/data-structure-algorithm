@@ -96,26 +96,29 @@ class LinkedList:
         else:
             self.__head = node
 
-    def insert_at_beginning(self, data: Any) -> None:
+    def insert_at_beginning(self, new_data: Any) -> None:
         """to insert data to head"""
 
         # -> create new node
         # -> set current head node as next node (to new node)
         # -> set new node as new head of LL
 
-        new_node = Node(data)
-        new_node.next = self.__head
-        self.head = new_node
+        new_node = Node(new_data)
+        if self.__head is None:
+            self.__head = new_node
+        else:
+            new_node.next = self.__head
+            self.head = new_node
 
     def insert_after(self, previous_node: Node, new_node_data: Any) -> None:
         """to create new node + insert new data to next node"""
 
         if not isinstance(previous_node, Node):
             print("previous node must be a node object")
-
-        new_node = Node(new_node_data)
-        new_node.next = previous_node.next
-        previous_node.next = new_node
+        else:
+            new_node = Node(new_node_data)
+            new_node.next = previous_node.next
+            previous_node.next = new_node
 
     def insert_at_end(self, new_node_data: Any) -> None:
         """to insert node at the end of the LL"""
@@ -175,6 +178,8 @@ class LinkedList:
 
             cur = cur.next
 
+        return None
+
     def sort(self, reversed_sort: bool = False):
         """to sort"""
 
@@ -220,8 +225,8 @@ if __name__ == "__main__":
     numbers = [x for x in range(1, 100)]
     arr_pop = [choice(numbers) for _ in range(10)]
 
-    head = Node(0)
-    linked_list = LinkedList(head)
+    linked_list = LinkedList()
+    linked_list.insert_at_beginning(0)
 
     k = linked_list.head
     for item in arr_pop:
