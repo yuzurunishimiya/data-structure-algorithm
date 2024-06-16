@@ -184,29 +184,26 @@ class LinkedList:
         if cur is None:
             return
 
+        # karena ditambahkan percabangan if reversed_sort
+        # untuk mendapatkan runtime yang lebih baik maka harus duplikat code dibawah
+        # dan mengganti if reversed_sort menjadi < dan > pada kedua kode
+        # maka digunakan percabangan karena perbedaan runtime pada angka data dibawah 20k
+        # masih menghasilkan runtime yang cenderung sama/tidak begitu berbeda jauh hasilnya
+
         while cur is not None:
             idx: Node = cur.next # idx = next node
 
             while idx is not None:
-                if cur.data > idx.data:
-                    cur.data, idx.data = idx.data, cur.data
+                if reversed_sort is False:
+                    if cur.data > idx.data:
+                        cur.data, idx.data = idx.data, cur.data
+                else:
+                    if cur.data < idx.data:
+                        cur.data, idx.data = idx.data, cur.data
 
                 idx = idx.next
 
             cur = cur.next
-
-        if reversed_sort is True:
-            cur = self.__head
-            idx = Node(None)
-
-            while cur is not None:
-                idx = cur.next
-
-                while idx is not None:
-                    cur.data, idx.data = idx.data, cur.data
-                    idx = idx.next
-
-                cur = cur.next
 
     def print_list(self) -> None:
         """print linked-list"""
