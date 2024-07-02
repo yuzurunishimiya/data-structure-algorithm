@@ -17,6 +17,7 @@ Hash Collision:
         - Collision resolution by chaining
             yang berarti menyimpan data pada index yang sama dengan chain
             menggunakan sebuah doubly linked-list
+            atau disimpan dalam bentuk array[tuple] -> [(),(),()...()]
 
             pseudocode:
                 ChainedHashedSearch(T, k)
@@ -65,52 +66,102 @@ Good Hash Function
     In Universal hashing, the hash function is chosen at random independent of keys.
 """
 
-# Example by python (from programiz)
-
-hashTable = [[],] * 10
-
-def checkPrime(n):
-    if n == 1 or n == 0:
-        return 0
-
-    for i in range(2, n//2):
-        if n % i == 0:
-            return 0
-
-    return 1
+from typing import Any, Optional
 
 
-def getPrime(n):
-    if n % 2 == 0:
-        n = n + 1
+class HashTable:
+    """Hash table data structure"""
 
-    while not checkPrime(n):
-        n += 2
+    def __init__(self, size: int) -> None:
+        """size of array[], it will be good if it is a prime number"""
+        self.__size = size
+        self.__hash_table = [[],] * self.__size
 
-    return n
+    @staticmethod
+    def check_prime(number) -> bool:
+        """to check if number a prime number or not"""
+
+        if number == 1 or number == 0:
+            return False
+
+        for i in range(2, number//2):
+            if i % 2 == 0:
+                return False
+
+        return True
+
+    def _hash_function_div_method(self, key) -> int:
+        """division method hash function"""
+
+        return key % self.__size
+
+    def insert_data(self, key, data) -> None:
+        """insert data"""
+
+        # ignore collision
+        index = self._hash_function_div_method(key)
+        self.__hash_table[index] = [key, data]
+
+        # use chaining to solve collision
+        # index = self._hash_function_div_method(key)
+        # self.__hash_table[index].append((key, data,))
+
+    def lookup_data(self, key) -> Optional[Any]:
+        """to look up data"""
+
+        # ignore collision, so data maybe overwritted (will be not found)
+        index = self._hash_function_div_method(key)
+        target = self.__hash_table[index]
+
+        # target[0] => key, target[1] => data
+        if target[0] == key:
+            return target[1]
+
+        # if chaining method used
+        # index = self._hash_function_div_method(key)
+        # target = self.__hash_table[index]
+
+        # target[] -> [(),(),(), ...] -> (): container
+        # container[0] = key, container[1] = data
+
+        # for container in target:
+        #     if container[0] == key:
+        #         return container[1]
+
+    def remove_data(self, key) -> None:
+        """to remove data"""
+
+        index = self._hash_function_div_method(key)
+        self.__hash_table[index] = []
+
+        # if chaining method used
+        # index = self._hash_function_div_method(key)
+        # target = self.__hash_table[index]
+        # container_index = None
+        # for i, container in enumerate(target):
+        #     if container[0] == key:
+        #         container_index = i
+        #         break
+
+        # if container_index:
+        #     target.pop(container_index)
+
+    def display_hash_table(self):
+        """to display hash table"""
+
+        print(self.__hash_table)
 
 
-def hashFunction(key):
-    capacity = getPrime(10)
-    return key % capacity
+if __name__ == "__main__":
+    ht = HashTable(7)
+    ht.insert_data(key=123, data="apple")
+    ht.insert_data(key=234, data="orange")
+    ht.insert_data(key=345, data="banana")
 
+    ht.display_hash_table()
+    KEY = 123
+    lookup = ht.lookup_data(KEY)
+    print(f"lookup data of key {KEY}: {lookup}")
 
-def insertData(key, data):
-    index = hashFunction(key)
-    print(index)
-    hashTable[index] = [key, data]
-
-def removeData(key):
-    index = hashFunction(key)
-    hashTable[index] = []
-
-insertData(123, "apple")
-insertData(432, "mango")
-insertData(213, "banana")
-insertData(654, "guava")
-
-print(hashTable)
-
-removeData(123)
-
-print(hashTable)
+    ht.remove_data(345)
+    ht.display_hash_table()
